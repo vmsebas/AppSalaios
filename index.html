@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Salários - Portugal</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-calculator"></i> Calculadora de Salários - Portugal</h1>
+        
+        <div class="layout-grid">
+            <!-- Formulário (Coluna Esquerda) -->
+            <div class="form-column">
+                <form id="salaryForm">
+                    <!-- Dados Pessoais -->
+                    <section class="form-section">
+                        <h2><i class="fas fa-user"></i> Dados Pessoais</h2>
+                        <div class="form-group">
+                            <label for="age"><i class="fas fa-birthday-cake"></i> Idade:</label>
+                            <input type="number" id="age" required placeholder="Ex: 30">
+                        </div>
+                        <div class="form-group">
+                            <label for="maritalStatus"><i class="fas fa-ring"></i> Estado Civil:</label>
+                            <select id="maritalStatus" required>
+                                <option value="single">Solteiro</option>
+                                <option value="married">Casado - 1 Titular</option>
+                                <option value="married2">Casado - 2 Titulares</option>
+                                <option value="divorced">Divorciado</option>
+                                <option value="widowed">Viúvo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dependents"><i class="fas fa-child"></i> Número de Dependentes:</label>
+                            <input type="number" id="dependents" min="0" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="deficiency"><i class="fas fa-wheelchair"></i> Deficiência:</label>
+                            <select id="deficiency" required>
+                                <option value="no">Não</option>
+                                <option value="yes">Sim</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="region"><i class="fas fa-map-marker-alt"></i> Região:</label>
+                            <select id="region" required>
+                                <option value="mainland">Continente</option>
+                                <option value="madeira">Madeira</option>
+                                <option value="azores">Açores</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Retenção Voluntária do IRS -->
+                        <div class="form-section irs-retention-section">
+                            <h3><i class="fas fa-percentage"></i> Retenção Voluntária IRS</h3>
+                            <div class="form-group">
+                                <label for="customRetention">Tipo de Retenção:</label>
+                                <select id="customRetention" required>
+                                    <option value="normal">Normal (Tabelas Oficiais)</option>
+                                    <option value="custom">Retenção Personalizada</option>
+                                </select>
+                            </div>
+                            <div class="form-group retention-amount" style="display: none;">
+                                <label for="retentionPercentage">Percentagem de Retenção:</label>
+                                <div class="retention-input-group">
+                                    <input type="number" id="retentionPercentage" min="0" max="100" step="0.5">
+                                    <span class="minimum-info">Mínimo legal: <span id="minimumRetention">0</span>%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Dados Financeiros -->
+                    <section class="form-section">
+                        <h2><i class="fas fa-euro-sign"></i> Dados Financeiros</h2>
+                        <div class="form-group">
+                            <label for="grossSalary"><i class="fas fa-money-bill-wave"></i> Salário Bruto Mensal (€):</label>
+                            <input type="number" id="grossSalary" required step="0.01" placeholder="Ex: 2000">
+                        </div>
+                        <div class="form-group">
+                            <label for="paymentMonths"><i class="fas fa-calendar-alt"></i> Número de Pagas:</label>
+                            <select id="paymentMonths" required>
+                                <option value="12">12 meses</option>
+                                <option value="14" selected>14 meses (com subsídios)</option>
+                            </select>
+                        </div>
+
+                        <!-- Subsídio de Alimentação -->
+                        <div class="form-section meal-allowance-section">
+                            <h3><i class="fas fa-utensils"></i> Subsídio de Alimentação</h3>
+                            <div class="form-group">
+                                <label for="workDays">Dias por Mês:</label>
+                                <input type="number" id="workDays" value="30" min="0" max="31">
+                            </div>
+                            <div class="form-group">
+                                <label for="paymentMethod">Método de Pagamento:</label>
+                                <select id="paymentMethod">
+                                    <option value="card">Cartão Refeição (máx. 288€/mês)</option>
+                                    <option value="cash">Dinheiro/Transferência (máx. 156€/mês)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="mealAllowance">Valor Diário:</label>
+                                <input type="number" id="mealAllowance" step="0.01" min="0">
+                            </div>
+                        </div>
+                    </section>
+
+                    <button type="submit" class="calculate-btn"><i class="fas fa-calculator"></i> Calcular</button>
+                </form>
+            </div>
+
+            <!-- Resultados (Coluna Direita) -->
+            <div class="results-column">
+                <div class="results-card">
+                    <h2><i class="fas fa-chart-line"></i> Resumo Salarial</h2>
+                    
+                    <!-- Salário e Deduções -->
+                    <div class="results-section">
+                        <h3><i class="fas fa-money-bill-wave"></i> Salário Base e Deduções</h3>
+                        <div class="result-item">
+                            <label>Salário Base:</label>
+                            <span id="grossSalaryDisplay">0.00 €</span>
+                        </div>
+                        <div class="result-item">
+                            <label>SS Empregado (11%):</label>
+                            <span id="socialSecurity">0.00 €</span>
+                        </div>
+                        <div class="result-item highlight">
+                            <label>Salário Líquido (sem IRS):</label>
+                            <span id="netSalaryWithoutIRS">0.00 €</span>
+                        </div>
+                    </div>
+
+                    <!-- IRS e Total Final -->
+                    <div class="results-section">
+                        <h3><i class="fas fa-percentage"></i> IRS e Total Final</h3>
+                        <div class="result-item">
+                            <label>IRS:</label>
+                            <div class="tax-details">
+                                <span id="irs">0.00 €</span>
+                                <span class="tax-rate">(<span id="irsRate">0.0</span>%)</span>
+                            </div>
+                        </div>
+                        <div class="result-item tax-info">
+                            <label>Taxa Legal:</label>
+                            <div class="tax-details">
+                                <span id="legalRate">0.0</span>%
+                                <span class="tax-note">(mínimo por lei)</span>
+                            </div>
+                        </div>
+                        <div class="result-item highlight">
+                            <label>Salário Líquido Final:</label>
+                            <span id="netSalaryMonthly">0.00 €</span>
+                        </div>
+                    </div>
+
+                    <!-- Subsídio de Alimentação -->
+                    <div class="results-section">
+                        <h3><i class="fas fa-utensils"></i> Subsídio de Alimentação</h3>
+                        <div class="result-item">
+                            <label>Total Mensal:</label>
+                            <span id="mealAllowanceTotal">0.00 €</span>
+                        </div>
+                        <div class="result-item">
+                            <label>Valor Isento:</label>
+                            <span id="mealAllowanceExempt">0.00 €</span>
+                        </div>
+                        <div class="result-item">
+                            <label>Valor Tributável:</label>
+                            <span id="mealAllowanceTaxable">0.00 €</span>
+                        </div>
+                    </div>
+
+                    <!-- Total Líquido -->
+                    <div class="results-section highlight">
+                        <h3><i class="fas fa-coins"></i> Total Líquido Mensal</h3>
+                        <div class="result-item large">
+                            <label>Total a Receber:</label>
+                            <span id="totalMonthlyNet">0.00 €</span>
+                        </div>
+                    </div>
+
+                    <!-- Custo Empresa -->
+                    <div class="results-section">
+                        <h3><i class="fas fa-building"></i> Custo para a Empresa</h3>
+                        <div class="result-item">
+                            <label>SS Empresa (23.75%):</label>
+                            <span id="employerSocialSecurity">0.00 €</span>
+                        </div>
+                        <div class="result-item highlight">
+                            <label>Custo Total:</label>
+                            <span id="employerCost">0.00 €</span>
+                        </div>
+                    </div>
+
+                    <!-- Análise IRS Anual -->
+                    <div class="results-section">
+                        <h3><i class="fas fa-chart-bar"></i> Análise IRS Anual</h3>
+                        <div class="result-item">
+                            <label>Rendimento Anual (14 meses):</label>
+                            <span id="annualIncome">0.00 €</span>
+                        </div>
+                        <div class="result-item">
+                            <label>IRS Anual Estimado:</label>
+                            <span id="annualIRS">0.00 €</span>
+                        </div>
+                        <div id="irsAnalysis" class="analysis-text">
+                            <!-- Análise IRS será inserida aqui -->
+                        </div>
+                    </div>
+
+                    <!-- Benefícios Fiscais -->
+                    <div class="results-section">
+                        <h3><i class="fas fa-gift"></i> Benefícios Fiscais</h3>
+                        <div id="taxBenefits" class="benefits-list">
+                            <!-- Benefícios fiscais serão inseridos aqui -->
+                        </div>
+                    </div>
+
+                    <!-- Recomendações -->
+                    <div class="results-section">
+                        <h3><i class="fas fa-lightbulb"></i> Recomendações</h3>
+                        <div id="recommendations" class="recommendations-list">
+                            <!-- Recomendações serão inseridas aqui -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>

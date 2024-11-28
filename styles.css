@@ -1,0 +1,728 @@
+:root {
+    --primary-color: #7eb2dd;
+    --secondary-color: #9ec5ff;
+    --background-color: #f0f4f8;
+    --form-bg: #ffffff;
+    --text-color: #2c3e50;
+    --text-color-light: #546e7a;
+    --border-color: #e0e6ed;
+    --success-color: #98d8a0;
+    --warning-color: #ffd699;
+    --info-color: #7fcbf3;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #e8f0f8;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.2em;
+    text-shadow: 1px 1px 2px var(--shadow-color);
+}
+
+.layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Estilos del formulario */
+.form-column {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px var(--shadow-color);
+}
+
+.form-section {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.form-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.2rem;
+    font-size: 1.4em;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+input, select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: white;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.calculate-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Estilos de resultados */
+.results-column {
+    position: sticky;
+    top: 2rem;
+}
+
+.results-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px var(--shadow-color);
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.results-section {
+    background: linear-gradient(to right, #f3f8fc, #edf3f8);
+    border-radius: 8px;
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.results-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.1em;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.results-section.highlight {
+    background: linear-gradient(to right, #e3f2fd, #bbdefb);
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
+}
+
+.result-item label {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.result-item span {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.result-item.large {
+    font-size: 1.2em;
+    background-color: rgba(255, 255, 255, 0.9);
+    font-weight: bold;
+}
+
+/* Estilos para análisis y recomendaciones */
+.analysis-text p,
+.recommendations-list p,
+.benefits-list p {
+    margin: 0.8rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.analysis-text p {
+    border-left: 4px solid var(--info-color);
+}
+
+.recommendations-list p {
+    border-left: 4px solid var(--success-color);
+}
+
+.benefits-list p {
+    border-left: 4px solid var(--warning-color);
+}
+
+/* Iconos */
+.fas {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .layout-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .results-column {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .form-column,
+    .results-card {
+        padding: 1rem;
+    }
+
+    .result-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .result-item span {
+        margin-top: 0.5rem;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    border: 2px solid var(--border-color);
+}
+
+.form-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input, select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+}
+
+.calculate-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.results {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--success-color);
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.result-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--background-color), white);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.result-item h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.result-item p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--success-color);
+}
+
+.recommendations {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--info-color), var(--primary-color));
+    border-radius: 10px;
+    color: white;
+}
+
+.recommendations h3 {
+    color: var(--warning-color);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.recommendations ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recommendations li {
+    margin-bottom: 0.8rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.subsidy-section {
+    background: linear-gradient(135deg, var(--warning-color), var(--accent-color));
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+    color: white;
+}
+
+.subsidy-section h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.subsidy-section .form-group label {
+    color: white;
+}
+
+.subsidy-section .form-group input,
+.subsidy-section .form-group select {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+}
+
+.toggle-group {
+    margin-bottom: 1rem;
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.toggle-input {
+    display: none;
+}
+
+.toggle-switch {
+    width: 50px;
+    height: 26px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 13px;
+    position: relative;
+    margin-left: 1rem;
+}
+
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: white;
+    top: 2px;
+    left: 2px;
+}
+
+.toggle-input:checked + .toggle-switch {
+    background-color: var(--success-color);
+}
+
+.toggle-input:checked + .toggle-switch::after {
+    transform: translateX(24px);
+}
+
+.hidden-section {
+    display: none;
+    padding: 1rem;
+    margin: 0.5rem 0 1rem 1rem;
+    border-left: 3px solid var(--secondary-color);
+    background: rgba(var(--secondary-color-rgb), 0.05);
+    border-radius: 0 10px 10px 0;
+}
+
+.result-group {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-item label {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.result-item span {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.result-item.highlight {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    margin: 0.5rem -1rem -1rem -1rem;
+    padding: 1rem;
+    border-radius: 0 0 10px 10px;
+}
+
+.result-item.highlight label,
+.result-item.highlight span {
+    color: white;
+}
+
+.sub-result {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 0.85em;
+    color: #666;
+}
+
+.meal-allowance-section {
+    background: linear-gradient(135deg, var(--primary-color-light), var(--secondary-color-light));
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.meal-allowance-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.meal-allowance-section .form-group {
+    margin-bottom: 1rem;
+}
+
+.meal-allowance-section .info-text {
+    display: block;
+    color: var(--text-color-light);
+    font-size: 0.85em;
+    margin-top: 0.3rem;
+}
+
+.meal-allowance-section select,
+.meal-allowance-section input {
+    background: white;
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.meal-allowance-section select:focus,
+.meal-allowance-section input:focus {
+    border-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .form-section {
+        padding: 1.5rem;
+    }
+    
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Estilos para las secciones de análisis */
+.analysis-text p,
+.benefits-list p,
+.recommendations-list p {
+    margin: 8px 0;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+.analysis-text p {
+    border-left: 4px solid var(--info-color);
+}
+
+.recommendations-list p {
+    border-left: 4px solid var(--success-color);
+}
+
+.benefits-list p {
+    border-left: 4px solid var(--warning-color);
+}
+
+/* Destacar información importante */
+.highlight-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-left: 4px solid #28a745;
+}
+
+.result-item.large {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* Iconos y emojis */
+.fa-lightbulb,
+.fa-gift,
+.fa-chart-line {
+    color: #ffc107;
+}
+
+/* Estilos para las recomendaciones */
+.recommendations-list p {
+    border-left: 4px solid #17a2b8;
+    margin-bottom: 10px;
+}
+
+/* Beneficios fiscales */
+.benefits-list p {
+    border-left: 4px solid #28a745;
+}
+
+/* Análisis IRS */
+.analysis-text p {
+    border-left: 4px solid #007bff;
+}
+
+/* Pension Section Styles */
+.pension-section {
+    margin-top: 2rem;
+    gap: 2rem;
+}
+
+.info-card, .calculator-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.info-content {
+    margin-top: 1rem;
+}
+
+.info-content h3 {
+    color: #2c3e50;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.info-content li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.info-content li:before {
+    content: "•";
+    color: #3498db;
+    position: absolute;
+    left: 0;
+}
+
+.pension-calculator {
+    margin-top: 1rem;
+}
+
+.pension-results {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+/* Estilos para la sección de retención voluntaria */
+.irs-retention-section {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.irs-retention-section h3 {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.retention-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.retention-input-group input {
+    width: 100px;
+}
+
+.minimum-info {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.minimum-info span {
+    font-weight: bold;
+    color: #dc3545;
+}
+
+/* Estilo para cuando el porcentaje es menor que el mínimo */
+.retention-warning {
+    border-color: #dc3545 !important;
+    background-color: #fff8f8;
+}
+
+.retention-warning-text {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+/* Estilos para los detalles del IRS */
+.tax-details {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tax-rate {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.tax-info {
+    font-size: 0.95rem;
+    color: #495057;
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin: 0.5rem 0;
+}
+
+.tax-note {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-style: italic;
+}

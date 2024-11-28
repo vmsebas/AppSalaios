@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/(.+\\.js)",
+      "headers": {
+        "Content-Type": "application/javascript"
+      },
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.+\\.css)",
+      "headers": {
+        "Content-Type": "text/css"
+      },
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
